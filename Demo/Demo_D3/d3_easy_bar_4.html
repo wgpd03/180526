@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>D3 Lab</title>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            body {
+                background-color: lightgray;
+                font-size: 1.25em;
+            }
+        </style>
+    </head>
+    <body>
+            
+        <script>
+        
+            var barData = [
+                    { text: "A", amount: 10 }, 
+                    { text: "B", amount: 20 },
+                    { text: "C", amount: 30 }
+                ];
+                
+            var colorList = d3.scaleOrdinal(d3.schemeCategory20b);
+            
+            d3.selectAll("div")
+                .data(barData)
+                .enter()
+                .append("div")
+                .text(function (d) { return d.text })
+                // .style("background", "green")
+                .style("height", "20px")
+                .style("margin", "5px")
+                .style("width", function (d) { return d.amount * 10 + "px" })
+                .style("background", function(d, i) { return colorList(i) });
+                
+
+        </script>
+        
+    </body>
+</html>

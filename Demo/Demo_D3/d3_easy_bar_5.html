@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>D3 Lab</title>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <style>
+            body {
+                background-color: lightgray;
+                font-size: 1.25em;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div id="previousDiv">
+            <div>AAA</div>
+            <div>BBB</div>
+            <div>CCC</div>
+        </div>
+        <div id="otherDiv">
+            <div>DDD</div>
+            <div>EEE</div>
+        </div>
+            
+        <script>
+        
+            var barData = [
+                    { text: "A", amount: 10 }, 
+                    { text: "B", amount: 20 },
+                    { text: "C", amount: 30 }
+                ];
+                
+            var colorList = d3.scaleOrdinal(d3.schemeCategory20b);
+            
+            d3.selectAll("#previousDiv div").remove();
+            
+            // 這兩行的寫法，效果不同，為什麼呢?
+            // d3.selectAll("#previousDiv").selectAll("div")
+            // --
+            // d3.selectAll("#previousDiv div")
+            
+            d3.selectAll("#previousDiv").selectAll("div")
+                .data(barData).enter().append("div")
+                .text(function (d) { return d.text })
+                .style("border", "1px solid gray")
+                .style("height", "20px")
+                .style("margin", "5px")
+                .style("width", function (d) {
+                    return d.amount * 10 + "px";
+                })
+                .style("background", function (d, i) {
+                    return colorList(i);
+                });
+
+
+        </script>
+        
+    </body>
+</html>
